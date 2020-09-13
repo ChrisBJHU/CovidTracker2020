@@ -29,8 +29,22 @@ public class App
     public static void main( String[] args ) throws UnirestException, IOException
     {
     	String date = "2020-08-16";
-    	String state = "Texas";
-    	String city = "Houston";
+    	System.out.println("What City and State? (Write in format City, State)");
+    	Scanner object = new Scanner(System.in);
+    	String WholeString = object.nextLine();
+    	String[] statcity = WholeString.split(", ");
+    	
+    	
+    	
+    	String state = statcity[1];
+    	String city = statcity[0];
+    	state = state.toLowerCase();
+    	city = city.toLowerCase();
+    	state = state.substring(0,1).toUpperCase() + state.substring(1);
+    	city = city.substring(0,1).toUpperCase() + city.substring(1);
+    	
+    	
+    	
     	Calendar cal = Calendar.getInstance();
     	cal.add(Calendar.DATE, -31);
     	String[] finallist = new String[31];
@@ -60,7 +74,7 @@ public class App
     	}
     	
 
-        CSVWriter writer = new CSVWriter(new FileWriter("E:\\output.csv"));
+        CSVWriter writer = new CSVWriter(new FileWriter("output.csv"));
     	for(int i = 0; i <finallist.length;i++)
     	{
     		ArrayList<String> Dates = new ArrayList<String>();
@@ -104,7 +118,7 @@ public class App
     	        JsonParser jp = new JsonParser();
     	        JsonElement je = jp.parse(response.getBody().toString());
     	        String prettyJsonString = gson.toJson(je);
-    	        //System.out.print(prettyJsonString);
+    	        System.out.print(prettyJsonString);
     	        
     	        
     	        
@@ -138,9 +152,9 @@ public class App
     	        	}
     	        }
 
-    	        System.out.println(Dates);
-    	        System.out.println(Confirmed);
-    	        System.out.println(Deaths);
+    	        //System.out.println(Dates);
+    	        //System.out.println(Confirmed);
+    	        //System.out.println(Deaths);
     	        ArrayList<String> al = new ArrayList<String>();
                 al.addAll(Dates);
                 al.addAll(Confirmed);
